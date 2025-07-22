@@ -1,12 +1,8 @@
 
 services:
-
   nuxt:
-
     build:
-
       context: .
-
       dockerfile: dockerfile
     # 컨테이너 이름 설정
     container_name: sample1-app
@@ -23,27 +19,19 @@ services:
 
 
   nuxt-dev:
-
     build:
-
       context: .
-
       dockerfile: dockerfile.dev # 개발용 dockerfile 지정
     # 컨테이너 이름 설정
     container_name: sample1-dev-app
-
     ports:
       - "7012:3000"
-
     volumes:
       - ./nuxt:/app
-
     working_dir: /app
     # 환경 변수 설정
     environment:
-
       NODE_ENV: development
-
     command: pnpm dev
     # 개발 중에는 보통 재시작 정책을 설정하지 않거나, 'no'로 설정하여 수동 제어합니다.
     # restart: no
