@@ -1,0 +1,49 @@
+
+services:
+
+  nuxt:
+
+    build:
+
+      context: .
+
+      dockerfile: dockerfile
+    # 컨테이너 이름 설정
+    container_name: sample1-app
+    ports:
+      - "7011:3000"
+    working_dir: /app
+    environment:
+      NODE_ENV: production
+      # 필요하다면 데이터베이스 연결 문자열 등 다른 환경변수를 여기에 추가할 수 있습니다.
+      # DATABASE_URL: mysql://nuxtuser:nuxtpass@mysql:3306/nuxtapp
+    # 컨테이너 종료 시 재시작 정책 설정
+    # 'unless-stopped'는 컨테이너가 명시적으로 중지되지 않는 한 항상 재시작합니다.
+    restart: unless-stopped
+
+
+  nuxt-dev:
+
+    build:
+
+      context: .
+
+      dockerfile: dockerfile.dev # 개발용 dockerfile 지정
+    # 컨테이너 이름 설정
+    container_name: sample1-dev-app
+
+    ports:
+      - "7012:3000"
+
+    volumes:
+      - ./nuxt:/app
+
+    working_dir: /app
+    # 환경 변수 설정
+    environment:
+
+      NODE_ENV: development
+
+    command: pnpm dev
+    # 개발 중에는 보통 재시작 정책을 설정하지 않거나, 'no'로 설정하여 수동 제어합니다.
+    # restart: no

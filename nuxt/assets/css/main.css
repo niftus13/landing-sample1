@@ -1,0 +1,510 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- CSS 변수 (Variables) --- */
+:root {
+  --primary-color: #2563eb; /* 버튼, 강조 색상 */
+  --primary-gradient-end: #1d4ed8;   /* 그라데이션 끝 색상 */
+  --secondary-color: #555;  /* 보조 버튼 색상 */
+  --bg-light: #f8f9fa;      /* 섹션 배경색 */
+  --card-bg: #ffffff;       /* 카드 배경색 */
+  --shadow-light: rgba(0, 0, 0, 0.08); /* 카드 그림자 */
+  --border-light: #e0e0e0;  /* 카드 테두리 */
+  --text-dark: #333;        /* 기본 텍스트 색상 */
+  --text-medium: #666;      /* 보조 텍스트 색상 */
+  --text-price: var(--primary-color); /* 가격 텍스트 색상 */
+  --section-padding-y: 5rem; /* 섹션 상하 패딩 */
+  --container-max-width: 1500px; /* 컨테이너 최대 너비 */
+  --text-white: #ffffff;             /* 기본 흰색 텍스트 */
+  --text-white-opacity: rgba(255, 255, 255, 0.85); /* 투명도 있는 흰색 텍스트 */
+  --card-bg-dark: rgba(255, 255, 255, 0.1); /* 카드 배경색 (반투명) */
+  --card-border-dark: rgba(255, 255, 255, 0.2); /* 카드 테두리색 (반투명) */
+  --shadow-dark: rgba(0, 0, 0, 0.25); /* 카드 그림자 */
+  --icon-color: #ffffff; /* 아이콘 색상 */
+  --icon-color: #ffffff;
+  --kakao-yellow: #FEE500;
+  --kakao-text-dark: #3C1E1E;
+  --telegram-blue: #0088CC;
+  --telegram-text-white: #FFFFFF;
+  --border-radius-size: 8px;
+  --button-padding: 12px 20px;
+  --transition-speed: 0.3s;
+}
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+body {
+  font-family: "Inter", "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+    system-ui, sans-serif;
+  line-height: 1.6;
+  color: #1a1a1a;
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  color: #1a1a1a;
+}
+h1 {
+  font-size: 3.5rem;
+}
+h2 {
+  font-size: 2.5rem;
+}
+h3 {
+  font-size: 1.875rem;
+}
+h4 {
+  font-size: 1.5rem;
+}
+h5 {
+  font-size: 1.25rem;
+}
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+nav a,
+nav a:visited {
+  color: white;
+}
+
+section {
+  padding: 80px 0;
+  scroll-margin-top: 80px;
+}
+.app-header.scrolled .nav-container .nav-menu a{
+  color:black
+}
+
+/* container */
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+   padding: 0 1.5rem;
+}
+
+/* section */
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+.section-header h2{
+  font-size: 2.8rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+.section-header h3{
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+.section-header p {
+    font-size: 1.125rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+/* butten */
+nav .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* padding: 12px 24px; */
+  border-radius: 50px;
+  text-decoration: none;
+  /* font-weight: 500; */
+  /* font-size: 1rem; */
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  padding: 14px 26px;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* --- Grid Layout --- */
+.grid {
+  display: grid;
+  gap: 3rem;
+}
+
+.grid-3{
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* --- Card Styles --- */
+.card {
+  background: var(--card-bg);
+  border-radius: 15px; /* 모서리 둥글게 */
+  padding: 0; /* 내부 패딩은 콘텐츠에 따라 조절 */
+  box-shadow: 0 10px 30px var(--shadow-light); /* 그림자 더 강조 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-light);
+  overflow: hidden; /* 이미지 둥근 모서리 적용 */
+  display: flex; /* 내부 요소들을 flex로 정렬 */
+  flex-direction: column; /* 세로 정렬 */
+  position: relative; /* 배지 위치를 위해 */
+}
+.card.popular {
+  border: 2px solid var(--primary-color); /* 인기 카드 테두리 강조 */
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15); /* 인기 카드 그림자 더 강조 */
+}
+.card:hover {
+  transform: translateY(-10px); /* 호버 시 살짝 위로 */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18); /* 호버 시 그림자 더 진하게 */
+}
+.card-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.card-image {
+  width: 100%;
+  height: 220px; /* 이미지 높이 고정 */
+  border-radius: 15px 15px 0 0; /* 상단만 둥글게 */
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .card-image img {
+  transform: scale(1.08); /* 호버 시 이미지 확대 */
+}
+
+.card-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0 1.5rem;
+}
+
+.card-price {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-price);
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 0 1.5rem;
+}
+
+.card-content {
+  flex-grow: 1; /* 남은 공간을 채우도록 설정 */
+  padding: 0 1.5rem 1.5rem; /* 하단 패딩 추가 */
+  color: var(--text-medium);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.card-content p {
+  margin-bottom: 0.5rem;
+}
+
+.card-content strong {
+  color: var(--text-dark);
+}
+
+.card-content .option-title {
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.card-content .option-list {
+  list-style: none; /* 기본 리스트 스타일 제거 */
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+.card-content .option-list li {
+  margin-bottom: 0.3rem;
+  position: relative;
+  padding-left: 1.5em; /* 체크 아이콘 공간 확보 */
+}
+
+.card-content .option-list li::before {
+  content: '✔'; /* 체크 아이콘 */
+  color: var(--primary-color);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* --- Buttons --- */
+.btn {
+  display: block; /* 블록 요소로 만들어 너비 100% 사용 */
+  width: calc(100% - 3rem); /* 카드 패딩 고려 */
+  margin: 0 1.5rem 1.5rem; /* 버튼 위치 조정 */
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #259eeb 0%, #1d4ed8 100%);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: white;
+  color: var(--secondary-color);
+  border: 1px solid var(--border-light);
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+
+/* main swiper-button */
+main .swiper-button-prev::after { content: 'PREV'; font-size: 20px; color: white; }
+main .swiper-button-next::after { content: 'NEXT'; font-size: 20px; color: white; }
+main .swiper-button-prev,
+main .swiper-button-next { width: auto; height: auto; padding: 8px 12px; background: rgba(0,0,0,0.1); border-radius: 4px; top: 50%; transform: translateY(-50%); }
+main .swiper-button-prev::after,
+main .swiper-button-next::after { font-size: 14px; font-weight: bold; }
+
+
+
+.white-text {
+    color: white;
+}
+
+.contact-section {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-gradient-end) 100%);
+  color: var(--text-white);
+  padding: var(--section-padding-y) 0;
+}
+
+.contact-section .section-header h2 {color: var(--text-white);}
+
+
+.contact-section .section-header p {color: var(--text-white);}
+
+/* --- Contact Card Styles --- */
+.contact-card {
+  background: var(--card-bg-dark); /* 반투명 배경 */
+  border: 1px solid var(--card-border-dark); /* 반투명 테두리 */
+  border-radius: 15px;
+  padding: 2.5rem 1.5rem; /* 내부 패딩 조정 */
+  text-align: center;
+  box-shadow: 0 10px 25px var(--shadow-dark); /* 어두운 그림자 */
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-10px); /* 호버 시 살짝 위로 */
+  background-color: rgba(255, 255, 255, 0.15); /* 호버 시 배경색 약간 진하게 */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35); /* 호버 시 그림자 더 강조 */
+}
+
+.icon-wrapper {
+  background-color: rgba(255, 255, 255, 0.2); /* 아이콘 배경 반투명 원 */
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 1.5rem; /* 중앙 정렬 및 하단 마진 */
+  transition: background-color 0.3s ease;
+}
+
+.contact-card:hover .icon-wrapper {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.contact-icon {
+  font-size: 2.2rem; /* 아이콘 크기 */
+  color: var(--icon-color);
+}
+
+.contact-card .card-title {
+  font-size: 1.75rem; /* 제목 크기 */
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-white);
+}
+
+.card-description {
+  font-size: 1rem;
+  color: var(--text-white-opacity);
+  margin-bottom: 1.5rem; /* 설명과 정보 사이 간격 */
+  line-height: 1.5;
+}
+
+.contact-info {
+  font-size: 1.25rem; /* 연락처 정보 글꼴 크기 */
+  font-weight: 500;
+  color: var(--text-white);
+  word-break: break-all; /* 긴 텍스트 줄바꿈 */
+}
+
+.contact-info a {
+  color: var(--text-white);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  font-size: 1em;
+}
+
+.contact-info a:hover {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: underline;
+}
+
+/* 마지막 contact-info에만 하단 마진 제거 (여러 개 있을 때) */
+.contact-card .contact-info:not(:last-child) {
+    margin-bottom: 0.5rem;
+}
+
+
+
+
+/* --- 반응형 (Responsive) --- */
+
+/* 태블릿 (Tablet) - 768px ~ 1023px */
+@media (max-width: 1023px) {
+  :root {
+    --section-padding-y: 4rem;
+  }
+  .section-header {
+    margin-bottom: 3rem;
+  }
+  .section-header h2 {
+    font-size: 2.5rem;
+  }
+  .section-header p {
+    font-size: 1.1rem;
+  }
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 태블릿에서는 2열 또는 3열 유동적으로 */
+    gap: 1.5rem;
+  }
+  .contact-card {
+    padding: 2rem 1rem;
+  }
+  .icon-wrapper {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+  }
+  .contact-icon {
+    font-size: 1.8rem;
+  }
+  .card-title {
+    font-size: 1.5rem;
+  }
+  .card-description {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  .contact-info {
+    font-size: 1.1rem;
+  }
+}
+
+/* 모바일 (Mobile) - 480px ~ 767px */
+@media (max-width: 767px) {
+  :root {
+    --section-padding-y: 3rem;
+  }
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  .section-header p {
+    font-size: 1rem;
+    max-width: 90%;
+  }
+  .container {
+    padding: 0 1rem;
+  }
+  .grid {
+    grid-template-columns: 1fr; /* 모바일에서는 1열 고정 */
+    gap: 1.5rem;
+  }
+  .contact-card {
+    padding: 1.8rem 1rem;
+  }
+  .icon-wrapper {
+    width: 55px;
+    height: 55px;
+    margin-bottom: 0.8rem;
+  }
+  .contact-icon {
+    font-size: 1.6rem;
+  }
+  .card-title {
+    font-size: 1.35rem;
+  }
+  .card-description {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  .contact-info {
+    font-size: 1rem;
+  }
+}
+
+/* 아주 작은 모바일 (Very Small Mobile) - ~479px */
+@media (max-width: 479px) {
+  :root {
+    --section-padding-y: 2.5rem;
+  }
+  .section-header h2 {
+    font-size: 1.8rem;
+  }
+  .section-header p {
+    font-size: 0.9rem;
+  }
+}
